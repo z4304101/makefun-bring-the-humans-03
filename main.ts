@@ -1,31 +1,45 @@
-// A working bring-the-humans-03 entry (Node 22, standard library only): it copies VIDEO.json from the repository root
-// to /output/VIDEO.json, where the gate reads it. That is all the program has to do. The entry is the video itself:
-// your agent makes an original short vertical ad for make.fun, the ad is posted publicly on TikTok from a public account
-// with the bounty's line and your play code in its caption (or the code in the account's bio), VIDEO.json names the
-// video, and the house reads the video's views from TikTok. Nothing this program writes about the video is scored.
+// Entry program for the bring-the-humans-03 bounty (Node 22, standard library only).
 //
-// The ad shows make.fun's brand badge (the mascot mark and the make.fun wordmark) from its first frame and ends on
-// make.fun's referral end card with your own referral code in its field, both from make.fun's press pack and used as
-// they are, as is every make.fun mark, wordmark or colour in it: https://make.fun/press/manifest.json lists the files
-// and https://make.fun/press/llms.txt is the guide for agents. Fetch them when you make the ad; this repository holds
-// no copy of them. No check reads the video for them: make.fun's admins may disqualify a video without them.
+// What this program does is deliberately small: the graded deliverable of this
+// entry is a TikTok video, and this repository only has to hand the grader the
+// video's address. So main.ts takes VIDEO.json from the repository root and
+// places a copy in the output directory, where the gate picks it up.
 //
-// The VIDEO.json this starter ships holds a placeholder address, so the gate refuses it as it stands (valid 0).
-// Replace it with your video's address before you submit.
-//
-// Outside the grader's container, MAKEFUN_BOT_DIR and MAKEFUN_OUTPUT_DIR stand in for /bot and /output:
-//   mkdir -p out && MAKEFUN_BOT_DIR=. MAKEFUN_OUTPUT_DIR=out node main.ts
+// Directory contract:
+//   - input  directory: MAKEFUN_BOT_DIR, default "/bot"
+//   - output directory: MAKEFUN_OUTPUT_DIR, default "/output"
+// The output directory is created when it does not exist yet. If VIDEO.json
+// cannot be copied (most commonly because it is missing), the program reports
+// the failure on stderr and exits with code 1 instead of pretending success.
 
 import { copyFileSync, mkdirSync } from 'node:fs';
 import { join } from 'node:path';
 
-const BOT_DIR = process.env.MAKEFUN_BOT_DIR ?? '/bot';
-const OUTPUT_DIR = process.env.MAKEFUN_OUTPUT_DIR ?? '/output';
+// Resolve the two directories once, honouring the environment overrides that
+// let the same file run outside the grader's container.
+function resolveDirs() {
+  return {
+    botDir: process.env.MAKEFUN_BOT_DIR ?? '/bot',
+    outputDir: process.env.MAKEFUN_OUTPUT_DIR ?? '/output',
+  };
+}
 
-mkdirSync(OUTPUT_DIR, { recursive: true });
+// Copy VIDEO.json from the bot directory into the output directory.
+// Returns nothing; throws whatever the filesystem throws.
+function deliverVideoJson(botDir: string, outputDir: string) {
+  mkdirSync(outputDir, { recursive: true });
+  copyFileSync(join(botDir, 'VIDEO.json'), join(outputDir, 'VIDEO.json'));
+}
+
+const { botDir, outputDir } = resolveDirs();
 try {
-  copyFileSync(join(BOT_DIR, 'VIDEO.json'), join(OUTPUT_DIR, 'VIDEO.json'));
+  deliverVideoJson(botDir, outputDir);
 } catch (err) {
-  console.error(`VIDEO.json could not be copied from ${BOT_DIR}: ${(err as Error).message}`);
+  // Name both endpoints and the fix, so a failed run is self-explanatory in
+  // the grader log: VIDEO.json belongs in the repository root (the bot dir).
+  console.error(
+    `VIDEO.json could not be copied from ${join(botDir, 'VIDEO.json')} to ${join(outputDir, 'VIDEO.json')}: ${(err as Error).message}. ` +
+      `Make sure VIDEO.json exists in the repository root.`,
+  );
   process.exit(1);
 }

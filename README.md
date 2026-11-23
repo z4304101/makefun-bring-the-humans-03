@@ -1,27 +1,48 @@
-# bring-the-humans-03 — entry repository (local skeleton, NOT yet submitted)
+# makefun-bring-the-humans-03
 
-> **STATUS: LOCAL SKELETON ONLY — NOT YET SUBMITTED.**
-> `VIDEO.json` now holds the real video address
-> `https://www.tiktok.com/@woabsm/video/7711063361836207380`
-> (posted 2026-11-23 02:24 Beijing time, verified watchable without login;
-> SHA-256 `70f37c5ab2cff937803c797fd3bb79add6a2c4fe0cf30cfbc4b625a00c49310e`).
-> Still missing before submission: create the public GitHub repository
-> under `z4304101`, package the transcripts, and run the kit CLI in an
-> isolated environment — see `TODO.md` in this directory.
+[![make.fun · bring-the-humans-03](https://make.fun/badge/bring-the-humans-03.svg)](https://make.fun/bounty/bring-the-humans-03?utm_source=github&utm_medium=readme&utm_campaign=bring-the-humans-03)
+[![rank](https://make.fun/badge/bring-the-humans-03/z4304101/makefun-bring-the-humans-03/rank.svg)](https://make.fun/bounty/bring-the-humans-03/leaderboard?utm_source=github&utm_medium=readme&utm_campaign=bring-the-humans-03)
+[![reward](https://make.fun/badge/bring-the-humans-03/z4304101/makefun-bring-the-humans-03/reward.svg)](https://make.fun/bounty/bring-the-humans-03?utm_source=github&utm_medium=readme&utm_campaign=bring-the-humans-03)
 
 An entry for the make.fun bounty **"Bring the humans with a TikTok ad"**
 (`bring-the-humans-03`, top 20 share $500, deadline 2026-11-25 03:00
-Beijing time / 2026-11-24T19:00Z). The entry is the video itself; this
-repository only hands in the video's address.
-
+Beijing time / 2026-11-24T19:00Z). The entry is the video itself — a
+28-second vertical TikTok ad for make.fun, made by an AI agent and posted
+publicly at `https://www.tiktok.com/@woabsm/video/7711063361836207380` —
+and this repository only hands in the video's address (`VIDEO.json`).
 make.fun is a site where AI agents compete in bounties for real money,
 and people enter them with their agents.
+
+## Run it
+
+```sh
+mkdir -p out && MAKEFUN_BOT_DIR=. MAKEFUN_OUTPUT_DIR=out node main.ts
+```
+
+---
+
+<sub>Entered on [make.fun](https://make.fun/?ref=kb2xsk3j&utm_source=github&utm_medium=readme&utm_campaign=bring-the-humans-03) · AI agents build software for cash rewards</sub>
+
+> **STATUS: REPOSITORY CREATED AND PUSHED — ENTRY NOT YET SUBMITTED.**
+> The public GitHub repository `z4304101/makefun-bring-the-humans-03` was
+> created by the entrant on 2026-11-23 and the first version of these five
+> files was pushed the same day (commit `c24e3e1`). That pushed version
+> predates the README badges and the `main.ts` rewrite recorded in
+> `TODO.md` ("提交前修复记录"); the current files still have to be pushed
+> as a new commit, and the entry must be submitted against that new
+> commit's SHA. Still missing before submission: push this revision,
+> package the transcripts, and run the kit CLI in an isolated
+> environment — see `TODO.md` in this directory.
+> `VIDEO.json` holds the real video address
+> `https://www.tiktok.com/@woabsm/video/7711063361836207380`
+> (posted 2026-11-23 02:24 Beijing time, verified watchable without login;
+> SHA-256 `70f37c5ab2cff937803c797fd3bb79add6a2c4fe0cf30cfbc4b625a00c49310e`).
 
 ## What is in this repository
 
 | File | What it is |
 |---|---|
-| `main.ts` | The kit starter program, **byte-for-byte unchanged** (SHA-256 `ba133ae1916d7d1769e9671004ac98f3146674f2f279c65762ebbf88c46bd9f5`, identical to `starter/main.ts` in the official kit). Node 22, standard library only, no network. It copies `VIDEO.json` from the repository root to `/output/VIDEO.json`, where the gate reads it. Nothing it writes about the video is scored. |
+| `main.ts` | The entry program (SHA-256 `b5e83b4b5fea022d0ccedff9f81d039506d62b5a123e8f1405af503e5e1a8797`). It began as the kit starter, then was rewritten by the agent in a recorded session (two rounds: a re-organisation in the agent's own structure and comments, then an improved error message — behaviour unchanged, see `TODO.md` "提交前修复记录"). Node 22, standard library only, no network. It copies `VIDEO.json` from the repository root to `/output/VIDEO.json`, where the gate reads it. Nothing it writes about the video is scored. |
 | `VIDEO.json` | Real video address: `{"url": "https://www.tiktok.com/@woabsm/video/7711063361836207380"}` (SHA-256 `70f37c5ab2cff937803c797fd3bb79add6a2c4fe0cf30cfbc4b625a00c49310e`, re-verified 2026-11-23 morning: `main.ts` copies it byte-for-byte, exit 0). Short links (`vm.tiktok.com`, `vt.tiktok.com`, `tiktok.com/t/...`) are refused by the gate — this is the full address, not a short link. |
 | `LICENSE` | MIT License, copied unchanged from the kit starter (OSI-approved; SHA-256 `c31b3812c449f571742f26f51db65810331e15ca53b9ee492f739288da6c6d36`). |
 | `README.md` | This file. |
@@ -32,8 +53,11 @@ the GitHub repository that is eventually submitted must be **public,
 owned by the entrant's own GitHub account (`z4304101`), created after
 the competition opened (2026-11-22 03:00 Beijing time), and under an
 OSI-approved license** (MIT, see `LICENSE`), with `main.ts` and
-`VIDEO.json` at its root. This local skeleton is not a GitHub
-repository yet; no repository has been created, pushed, or submitted.
+`VIDEO.json` at its root. The repository
+`z4304101/makefun-bring-the-humans-03` meets those requirements and was
+created and first pushed on 2026-11-23; the entry itself has not been
+submitted yet, and the revision in this directory (badges + rewritten
+`main.ts`) has not been pushed yet.
 
 ## The video and how it was made
 
